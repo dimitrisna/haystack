@@ -64,39 +64,7 @@ Ask any question on this topic and see if Haystack can find the correct answer t
         unsafe_allow_html=True,
     )
 
-    # Sidebar
-    st.sidebar.header("Options")
-    top_k_reader = st.sidebar.slider(
-        "Max. number of answers",
-        min_value=1,
-        max_value=10,
-        value=DEFAULT_NUMBER_OF_ANSWERS,
-        step=1,
-        on_change=reset_results,
-    )
-    top_k_retriever = st.sidebar.slider(
-        "Max. number of documents from retriever",
-        min_value=1,
-        max_value=10,
-        value=DEFAULT_DOCS_FROM_RETRIEVER,
-        step=1,
-        on_change=reset_results,
-    )
-    eval_mode = st.sidebar.checkbox("Evaluation mode")
-    debug = st.sidebar.checkbox("Show debug info")
-
-    # File upload block
-    if not DISABLE_FILE_UPLOAD:
-        st.sidebar.write("## File Upload:")
-        data_files = st.sidebar.file_uploader("", type=["pdf", "txt", "docx"], accept_multiple_files=True)
-        for data_file in data_files:
-            # Upload file
-            if data_file:
-                raw_json = upload_doc(data_file)
-                st.sidebar.write(str(data_file.name) + " &nbsp;&nbsp; ✅ ")
-                if debug:
-                    st.subheader("REST API JSON response")
-                    st.sidebar.write(raw_json)
+   
 
     hs_version = ""
     try:
